@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "SerogaGolub\\": "src/",
+      "Controllers\\": "src/Controllers"
+
+    }
+  },
+  "require": {
+    "ext-PDO": "*"
+  }
+
+}
