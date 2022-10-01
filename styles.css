@@ -1,0 +1,56 @@
+
+form {
+    padding: 10px;
+}
+
+
+.btn-add {
+    display: block;
+    margin: 5px auto ;
+}
+.conferences-container{
+    background: black;
+    margin: 2% 10%;
+}
+
+.form-container {
+    margin: 0 auto;
+    width:50%;
+    border: #e2e2e2 1px solid;
+    padding: 20px 40px;
+    border-radius: 4px;
+    background: blue;
+}
+
+.box-container {
+    margin: 20px;
+    border: #e2e2e2 1px solid;
+    width:450px;
+    height:300px;
+    padding: 20px;
+    border-radius: 4px;
+    background: black;
+}
+
+.title {
+    font-size: 33px;
+    font-weight: bold;
+
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.category {
+    background-color: #e2e2e2;
+    display: inline;
+    float: left;
+    padding: 5px 20px;
+    border: #d4d4d4 1px solid;
+    border-radius: 4px;
+}
+
+.btn-action{
+    float: right;
+}

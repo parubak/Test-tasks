@@ -4,27 +4,40 @@ namespace SerogaGolub\System;
 
 /**
  * Главный класс приложения
- *
- * @author farza
  */
 class App
 {
     /**
      * Запуск приложения
-     *
      * @throws \ErrorException
-     * @author farZa
      */
     public static function run()
     {
+        // контроллер и действие по умолчанию
+        $controller="home";
+        $action="main";
+
         // Получаем URL запроса
         $path = $_SERVER['REQUEST_URI'];
+
         // Разбиваем URL на части
         $pathParts = explode('/', $path);
-        // Получаем имя контроллера
-        $controller = $pathParts[1];
-        // Получаем имя действия
-        $action = $pathParts[2];
+//        // Получаем имя контроллера
+//        $controller = $pathParts[1];
+//        // Получаем имя действия
+//        $action = $pathParts[2];
+
+        // получаем имя контроллера
+        if ( !empty($pathParts[1]) )
+        {
+            $controller = $pathParts[1];
+        }
+        // получаем имя экшена
+        if ( !empty($pathParts[2]) )
+        {
+            $action = $pathParts[2];
+        }
+
         // Формируем пространство имен для контроллера
         $controller = 'SerogaGolub\\Controllers\\' . $controller . 'Controller';
         // Формируем наименование действия
@@ -37,11 +50,6 @@ class App
 
         // Создаем экземпляр класса контроллера
         $objController = new $controller;
-        echo "**controller**";
-        echo $controller;
-        echo "**action**";
-        echo $action;
-        echo "****";
 
         // Если действия у контроллера не существует, выбрасываем исключение
         if (!method_exists($objController, $action)) {

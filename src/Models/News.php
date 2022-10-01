@@ -1,7 +1,8 @@
 <?php
 
 namespace SerogaGolub\Models;
-use PDO;
+use PDOStatement;
+use SerogaGolub\System\DBmySQL;
 
 /**
  * Модель "Новости" содержащая бизнес логику
@@ -15,20 +16,20 @@ class News
      * Метод, отвечающий за получение всех данных
      * о новостях портала
      *
-     * @return array
+     * @return false|PDOStatement
      * @author farZa
      */
     public function displayAll()
     {
         // Строка соединения с базой данных
-        $dsn = 'mysql:host=mysql;dbname=db_comference_size;';
+        $dsn = new DBmySQL();
         // Создаем экземпляр класса для работы с БД
-        $pdo = new PDO($dsn, 'root', 'test');
+        $pdo = (new DBmySQL())->openConnection();
 
         // SQL запрос на получение всех новостей
         $sql = 'SELECT * FROM conferences';
 
         // Возвращаем полученные из БД данные
-        return $pdo->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
+        return $pdo->query($sql);
     }
 }
