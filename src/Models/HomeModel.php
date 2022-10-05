@@ -2,17 +2,18 @@
 
 namespace SerogaGolub\Models;
 
+use SerogaGolub\Controllers\HomeController;
 use SerogaGolub\System\DBmySQL;
 
-class CrudModel
+class HomeModel
 {
-    public function readData()
+    public function readData(): ?array
     {
         try {
             $db = new DBmySQL();
             $conn = $db->openConnection();
-            $sql = "SELECT id,Title,Date, Address, Map1,Map2,Country
-                    FROM db_comference_size.conferences 
+            $sql = "SELECT id,title,data, map_lat, map_lng,country
+                    FROM db_conference.conferences 
                     ORDER BY id DESC";
             $res = $conn->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
             $db->closeConnection();
@@ -25,11 +26,7 @@ class CrudModel
             return $res;
         }
 
-        return null;
-    }
 
-    public function edit($formArray)
-    {
         return null;
     }
 }

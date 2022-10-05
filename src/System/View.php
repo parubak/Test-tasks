@@ -24,7 +24,7 @@ class View
         $this->render($path, $arrayData);
         $content = ob_get_contents();
         ob_end_clean();
-
+//dd($arrayData);
         return $content;
     }
 
@@ -56,6 +56,7 @@ class View
             }
         }
         // Отображаем представление
-        include($path);
+//        dd($arrayData);
+        require($path);
     }
 }

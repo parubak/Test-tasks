@@ -1,46 +1,21 @@
 <?php
-/** @var array $data -arrays */
-/** @var array $news -arrays */
 /** @var array $head -arrays */
-/** @var array $content -arrays */
+/** @var array $contentHome -arrays */
 
 
 ?>
-
+<!DOCTYPE html>
 <html lang="">
-<?php echo $content["head"]; ?>
-<body>
-<?php //dd($arrayData);
+<?php echo $contentHome["head"]; ?>
 
-?>
-<main>
-    <div class="conferences-container" id="container">
-        <ol class="list-group list-group-numbered">
-            <?php
-            if (!empty($data)) {
-                foreach ($data as $k => $v) {
-                    ?>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                            <div class="fw-bold">
-                                <?php
-                                echo $data[$k]["Title"]; ?>
-                            </div>
-                            <?php
-                            echo $data[$k]["Date"]; ?>
-                        </div>
-                        <button class="btn-action btn btn-danger">Delete</button>
-                    </li>
-                    <?php
-                }
-            }
-            ?>
-        </ol>
-        <div>
-            <a href="add"><button class="btn-add btn position-relative btn-primary ">Add New Record</button></a>
-        </div>
-    </div>
-    <!-- Modal
+<body class="bg-light">
+<!--<main>-->
+https://stackoverflow.com/questions/6159074/given-the-lat-long-coordinates-how-can-we-find-out-the-city-country
+
+<?php echo $contentHome["main"]; ?>
+
+
+        <!-- Modal
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -137,6 +112,6 @@
     </div>
     <!- - Modal ends here - ->
     -->
-</main>
+<!--</main>-->
 </body>
 </html>

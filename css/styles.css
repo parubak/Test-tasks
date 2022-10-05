@@ -1,16 +1,31 @@
+/* Set the size of the div element that contains the map*/
+#map {
+    height: 400px;
+    /*   The height is 400 pixels*/
+    width: 100%;
+    /*   The width is the width of the web page*/
+}
+
+body {
+
+}
+a {
+    text-decoration: none;
+}
+
 
 form {
     padding: 10px;
 }
-
 
 .btn-add {
     display: block;
     margin: 5px auto ;
 }
 .conferences-container{
-    background: black;
-    margin: 2% 10%;
+    /*background: black;*/
+    margin: 5% 25%;
+
 }
 
 .form-container {
@@ -29,8 +44,12 @@ form {
     height:300px;
     padding: 20px;
     border-radius: 4px;
-    background: black;
+    /*background: black;*/
 }
+
+
+
+
 
 .title {
     font-size: 33px;

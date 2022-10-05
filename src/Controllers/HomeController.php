@@ -2,7 +2,7 @@
 
 namespace SerogaGolub\Controllers;
 
-use SerogaGolub\Models\CrudModel;
+use SerogaGolub\Models\HomeModel;
 use SerogaGolub\System\Controller;
 
 /**
@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->model = new CrudModel();
+        $this->model = new HomeModel();
         $this->data = $this->model->readData();
     }
 
@@ -23,20 +23,18 @@ class HomeController extends Controller
     public function actionMain()
     {
         // Рендер главной страницы портала
-//        $fileBody='news';
-        $fileHead = 'head';
-//
-//
-//        $bodyContent=$this->view->loadView($fileBody);
-        $headContent = $this->view->loadView($fileHead);
-        $arrayData = [
-            "data" => $this->data,
-            "content" => [
-                "head" => $headContent
-            ]
+
+        $fileMain = 'list';
+
+        $this->mainContent = $this->view->loadView($fileMain,[self::CONTENT=>$this->data]);
+        $this->arrayData = [
+            self::CONTENT => [
+                "main"=> $this->mainContent
+            ],
+            self::MESSAGE=>$this->displayMessage
         ];
 
-        $this->view->renderLayout('list', $arrayData);
+        $this->view->renderLayout($this->viewLayout, $this->arrayData);
     }
 
 

@@ -30,8 +30,8 @@ services:
     image: mysql:5.7
     container_name: mysql
     environment:
-      MYSQL_DATABASE: db_comference_size
-      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: db_conference
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3307:3306"
     volumes:

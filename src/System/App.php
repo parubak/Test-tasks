@@ -17,6 +17,7 @@ class App
         $controller="home";
         $action="main";
 
+
         // Получаем URL запроса
         $path = $_SERVER['REQUEST_URI'];
 
@@ -49,12 +50,13 @@ class App
         }
 
         // Создаем экземпляр класса контроллера
-        $objController = new $controller;
+        $objController=new $controller;
 
         // Если действия у контроллера не существует, выбрасываем исключение
         if (!method_exists($objController, $action)) {
             throw new \ErrorException('action does not exist');
         }
+
 
         // Вызываем действие контроллера
         $objController->$action();

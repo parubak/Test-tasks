@@ -7,7 +7,7 @@ use PDO;
 class DBmySQL
 {
     // Строка соединения с базой данных
-    private $server = "mysql:host=mysql;dbname=db_comference_size";
+    private $server = "mysql:host=mysql;dbname=db_conference";
     private $user = "root";
     private $pass = "test";
     private $options = array(
