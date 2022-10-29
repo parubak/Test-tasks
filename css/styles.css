@@ -5,11 +5,19 @@
     width: 100%;
     /*   The width is the width of the web page*/
 }
-
-body {
-
+#marker{
+    visibility: inherit;
 }
+
+.c-pointer {
+    cursor: pointer;
+}
+
+
 a {
+    text-decoration: none;
+}
+a:hover {
     text-decoration: none;
 }
 

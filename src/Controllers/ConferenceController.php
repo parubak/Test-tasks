@@ -2,7 +2,7 @@
 
 namespace SerogaGolub\Controllers;
 
-use SerogaGolub\Models\AddModel;
+use SerogaGolub\Models\ConferenceModel;
 use SerogaGolub\System\Controller;
 
 class ConferenceController extends Controller
@@ -12,69 +12,98 @@ class ConferenceController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->model = new AddModel();
+        $this->model = new ConferenceModel();
     }
 
-    public function  actionAdd(){
-        if ($_SERVER[self::METHOD]===self::POST) {
+    /**
+     * @throws \ErrorException
+     */
+    public function actionAdd()
+    {
+        if ($_SERVER[self::METHOD] === self::POST) {
+            if (!empty($_POST)) {
+                $this->model->addData($_POST);
 
-            if (! empty($_POST)){
-              if ($this->model->addData($_POST)){
-                  $this->displayMessage="OK";
-              }else{
-                  $this->displayMessage="ERROR";
-              };
-              $_POST=null;
-              dd( $this->displayMessage);
-                exit(200);
+                $_POST = null;
             }
-            exit(404);
+        } else {
+            $fileMain = 'add';
+
+            $this->mainContent = $this->view->loadView($fileMain, ["nowDate" => date("Y-m-d")]);
+            $this->arrayData = [
+                self::CONTENT => [
+                    "main" => $this->mainContent
+                ]
+            ];
+
+            $this->view->renderLayout($this->viewLayout, $this->arrayData);
         }
-
-        $fileMain = 'add';
-
-        $this->mainContent = $this->view->loadView($fileMain,["nowDate"=>date("Y-m-d")]);
-        $this->arrayData = [
-            self::CONTENT => [
-                "main"=> $this->mainContent
-            ],
-            self::MESSAGE=>$this->displayMessage
-        ];
-
-        $this->view->renderLayout($this->viewLayout, $this->arrayData);
     }
-    public function  actionUpdata(){
-        if ($_SERVER[self::METHOD]===self::POST) {
-            var_dump($_POST);
-            if (! empty($_POST["send"])){
-                $this->displayMessage=$_POST["send"];
-                $_POST=null;
+
+    /**
+     * @throws \ErrorException
+     */
+    public function actionInfo()
+    {
+        if ($_SERVER[self::METHOD] === self::GET) {
+
+            if (isset($_GET["id"])) {
+                $fileMain = 'info';
+
+                $this->mainContent = $this->view->loadView(
+                    $fileMain
+                    ,
+                    [self::CONTENT => $this->model->selectById($_GET["id"])]
+                );
             }
 
-            return;
-        }else {
-            echo self::GET;
-            var_dump($_GET);
+            $this->arrayData = [
+                self::CONTENT => [
+                    "main" => $this->mainContent
+                ],
+                self::MESSAGE => $this->displayMessage
+            ];
+
+            $this->view->renderLayout($this->viewLayout, $this->arrayData);
         }
-
-        $fileMain = 'updata';
-
-        $this->mainContent = $this->view->loadView($fileMain,["nowDate"=>date("Y-m-d")]);
-        $this->arrayData = [
-            self::CONTENT => [
-                "updata"=> $this->mainContent
-            ],
-            self::MESSAGE=>$this->displayMessage
-        ];
-
-        $this->view->renderLayout($this->viewLayout, $this->arrayData);
-
     }
-    public function  actionDelete(){
-        if ($_SERVER[self::METHOD]===self::POST) {
-            if (! empty($_POST["id"])){
+
+    /**
+     * @throws \ErrorException
+     */
+    public function actionEdit()
+    {
+        if ($_SERVER[self::METHOD] === self::POST) {
+            if (!empty($_POST)) {
+                $this->model->updateData($_POST);
+                $_POST = null;
+            }
+        } else {
+
+            $fileMain = 'edit';
+
+            $this->mainContent = $this->view->loadView($fileMain, [
+                self::CONTENT => $this->model->selectById($_GET["id"]),
+                "nowDate" => date("Y-m-d")
+            ]);
+
+            $this->arrayData = [
+                self::CONTENT => [
+                    "main" => $this->mainContent
+                ],
+                self::MESSAGE => $this->displayMessage
+            ];
 
 
+            $this->view->renderLayout($this->viewLayout, $this->arrayData);
+        }
+    }
+
+    public function actionDelete()
+    {
+        if ($_SERVER[self::METHOD] === self::POST) {
+            if (!empty($_POST["id"])) {
+                $this->model->deleteById($_POST["id"]);
 
                 exit(200);
             }

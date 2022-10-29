@@ -1,5 +1,7 @@
 {
 
+
+
     let map;
     let marker;
     let autocomplete;
@@ -21,8 +23,6 @@
     window.addEventListener('load', function () {
         flag = false;
         form = document.getElementById('frmAdd');
-        form.addEventListener('submit', validation);
-
     });
 
     // Initialize and add the map
@@ -118,6 +118,7 @@
 
     function validation(e) { // Устанавливаем событие отправки для формы с id=form
 
+        console.log(form.dataset.arr)
         form.classList.add('was-validated');
         e.preventDefault();
         e.stopPropagation();
@@ -127,11 +128,12 @@
             let formData = new FormData(form);
 
             // добавить к пересылке ещё пару ключ - значение
+            formData.append("id", id);
             formData.append("lat", marker.position.lat());
             formData.append("lng", marker.position.lng());
             // отослать
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "add");
+            xhr.open(e.target.method, e.target.action);
             xhr.send(formData);
             alert("ok!");
 
@@ -155,11 +157,11 @@
         } else {
             markAsValid("inputDate");
         }
-        if (flag===false) {
-            markAsInvalid("country", "country not selected");
-        } else {
-            markAsValid("country");
-        }
+        // if (flag===false) {
+        //     markAsInvalid("country", "country not selected");
+        // } else {
+        //     markAsValid("country");
+        // }
 
     }
 

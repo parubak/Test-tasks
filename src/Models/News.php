@@ -24,12 +24,12 @@ class News
         // Строка соединения с базой данных
         $dsn = new DBmySQL();
         // Создаем экземпляр класса для работы с БД
-        $pdo = (new DBmySQL())->openConnection();
+//        $pdo = (new DBmySQL())->openConnection();
 
         // SQL запрос на получение всех новостей
         $sql = 'SELECT * FROM conferences';
 
         // Возвращаем полученные из БД данные
-        return $pdo->query($sql);
+//        return $pdo->query($sql);
     }
 }

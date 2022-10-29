@@ -5,28 +5,26 @@ namespace SerogaGolub\Models;
 use SerogaGolub\Controllers\HomeController;
 use SerogaGolub\System\DBmySQL;
 
-class HomeModel
+class HomeModel extends DBmySQL
 {
+    /**
+     * @throws \ErrorException
+     */
     public function readData(): ?array
     {
         try {
-            $db = new DBmySQL();
-            $conn = $db->openConnection();
-            $sql = "SELECT id,title,data, map_lat, map_lng,country
-                    FROM db_conference.conferences 
+
+            $conn = $this->openConnection();
+            $sql = "SELECT *
+                    FROM conferences 
                     ORDER BY id DESC";
             $res = $conn->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
-            $db->closeConnection();
+            $this->closeConnection();
         } catch (\PDOException $e) {
-            echo "There is some problem in connection: " . $e->getMessage();
-            return null;
-        }
-        if (!empty($res)) {
-
-            return $res;
+            $this->closeConnection();
+            throw new \ErrorException( "There is some problem in connection: " . $e->getMessage());
         }
 
-
-        return null;
+        return $res;
     }
 }

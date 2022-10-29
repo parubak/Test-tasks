@@ -14,22 +14,24 @@ class DBmySQL
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     );
-    protected $con;
+    private $con;
 
 
-    public function openConnection()
+    /**
+     * @throws \ErrorException
+     */
+    protected function openConnection(): PDO
     {
         try {
             $this->con = new PDO($this->server, $this->user, $this->pass, $this->options);
 
             return $this->con;
         } catch (\PDOException $e) {
-            echo "There is some problem in connection: " . $e->getMessage();
-            return null;
+            throw new \ErrorException("There is some problem in connection: " . $e->getMessage());
         }
     }
 
-    public function closeConnection()
+    protected function closeConnection()
     {
         $this->con = null;
     }
