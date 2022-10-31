@@ -25,8 +25,8 @@ class  Controller
 
     public function __construct()
     {
-        $this->displayMessage="";
-        $this->viewLayout="index";
-        $this->view=new View();
+        $this->displayMessage = "";
+        $this->viewLayout = "index";
+        $this->view = new View();
     }
 }

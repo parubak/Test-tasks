@@ -17,7 +17,6 @@ window.addEventListener('load', async function () {
             if (arrayContent.map_lat != null && arrayContent.map_lng != null) {
 
                 const position = new google.maps.LatLng(arrayContent.map_lat, arrayContent.map_lng);
-
                 map.setCenter(position)
 
                 const marker = new google.maps.Marker({

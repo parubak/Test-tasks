@@ -2,11 +2,12 @@
 
 namespace SerogaGolub\System;
 
+use ErrorException;
+
 /**
  * Главный класс реализующий функционал отображения
  * представлений
  *
- * @author farza
  */
 class View
 {
@@ -14,7 +15,7 @@ class View
     private $layoutsPath = __DIR__ . '/../Views/layouts/';
 
     /**
-     * @throws \ErrorException
+     * @throws ErrorException
      */
     public function loadView(string $viewName, array $arrayData = [])
     {
@@ -24,28 +25,27 @@ class View
         $this->render($path, $arrayData);
         $content = ob_get_contents();
         ob_end_clean();
-//dd($arrayData);
+
         return $content;
     }
 
     /**
-     * @throws \ErrorException
+     * @throws ErrorException
      */
     public function renderLayout(string $layoutsName, array $arrayData = [])
     {
-        // Получаем путь, где лежат все представления
         $layoutsFile = $this->layoutsPath . $layoutsName . '.php';
         $this->render($layoutsFile, $arrayData);
     }
 
     /**
-     * @throws \ErrorException
+     * @throws ErrorException
      */
     protected function render(string $path, array $arrayData = [])
     {
         // Если представление не было найдено, выбрасываем исключение
         if (!file_exists($path)) {
-            throw new \ErrorException('view template cannot be found');
+            throw new ErrorException('view template cannot be found');
         }
 
         // Если данные были переданы, то из элементов массива
@@ -56,7 +56,6 @@ class View
             }
         }
         // Отображаем представление
-//        dd($arrayData);
         require($path);
     }
 }

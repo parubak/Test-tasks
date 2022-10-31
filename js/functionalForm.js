@@ -1,24 +1,19 @@
 let map;
 let marker;
 let listCountry;
-let form;
 let geocoder;
 let statusMessage;
 let showMarker;
 
 
-
-document.addEventListener("DOMContentLoaded", function (){
-
-    // form = document.getElementById('frmAdd');
+document.addEventListener("DOMContentLoaded", function () {
 
     listCountry = document.getElementById('country');
     showMarker = document.getElementById('marker');
-    statusMessage=document.getElementById("statusMessage");
+    statusMessage = document.getElementById("statusMessage");
 
-    // form.addEventListener("submit", validation);
     listCountry.addEventListener("change", changeListCountry)
-    showMarker.addEventListener("change",changeShowMarker );
+    showMarker.addEventListener("change", changeShowMarker);
 
     window.initMap = initMap;
 });
@@ -80,7 +75,6 @@ async function changeListCountry() {
             map.setZoom(6);
 
             if (showMarker.checked) {
-
                 marker.setPosition(position);
                 marker.setMap(map);
             }
@@ -98,53 +92,58 @@ function validation(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (e.target.checkValidity()&& setValidationResponse()) {
-
+    if (setValidationResponse() && e.target.checkValidity()) {
 
         sendFormData(e.target);
-
-        disableForm(e.target,true);
+        disableForm(e.target, true);
     }
     e.target.classList.add('was-validated');
 
 
 }
 
-function disableForm(form,disabled) {
+function disableForm(form, disabled) {
     let inputs = form.getElementsByTagName('input');
+
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].disabled = disabled;
     }
+
     listCountry.disabled = disabled;
     marker.setDraggable(!disabled);
 }
 
 
 function setValidationResponse() {
-    let flag=true;
-    const idTitle = "title";
-    const idInputDate = "inputDate";
+    let flag = true;
 
-    let title = document.getElementById(idTitle).value;
-    let inputDate = document.getElementById(idInputDate).value;
+    let title = document.getElementById("title");
+    let inputDate = document.getElementById("inputDate");
 
-    if (title.length < 2 || title.length > 255) {
-        markAsInvalid(idTitle, "required min: 2, max: 255 characters");
+    if (title.value.length < 2 || title.value.length > 255) {
+        markAsInvalid(title.id, "(required min: 2, max: 255 characters)");
     } else {
-        markAsValid(idTitle);
+        markAsValid(title.id);
     }
 
-    if (inputDate === "") {
-        markAsInvalid(idInputDate, "no date selected");
+    if (inputDate.value === "") {
+        markAsInvalid(inputDate.id, "(no date selected)");
     } else {
-        markAsValid(idInputDate);
+        const now = new Date();
+        const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+
+        if (Date.parse(inputDate.value) < today) {
+            markAsInvalid(inputDate.id, "(that time has already passed)");
+        } else {
+            markAsValid(inputDate.id);
+        }
     }
+
     if (listCountry.value === "") {
-        markAsInvalid("country", "country not selected");
+        markAsInvalid(listCountry.id, "(country not selected)");
     } else {
-        markAsValid("country");
+        markAsValid(listCountry.id);
     }
-    return flag;
 
     function markAsValid(id) {
         document.getElementById(id + "-info").style.display = "none";
@@ -153,6 +152,8 @@ function setValidationResponse() {
     function markAsInvalid(id, feedback) {
         document.getElementById(id + "-info").style.display = "inline";
         document.getElementById(id + "-info").innerText = feedback;
-        flag=false;
+        flag = false;
     }
+
+    return flag;
 }

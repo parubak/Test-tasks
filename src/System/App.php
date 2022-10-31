@@ -14,8 +14,8 @@ class App
     public static function run()
     {
         // контроллер и действие по умолчанию
-        $controller="home";
-        $action="main";
+        $controller = "home";
+        $action = "main";
 
 
         // Получаем URL запроса
@@ -23,19 +23,13 @@ class App
 
         // Разбиваем URL на части
         $pathParts = explode('/', $path);
-//        // Получаем имя контроллера
-//        $controller = $pathParts[1];
-//        // Получаем имя действия
-//        $action = $pathParts[2];
 
         // получаем имя контроллера
-        if ( !empty($pathParts[1]) )
-        {
+        if (!empty($pathParts[1])) {
             $controller = $pathParts[1];
         }
-        // получаем имя экшена
-        if ( !empty($pathParts[2]) )
-        {
+        // получаем имя действия
+        if (!empty($pathParts[2])) {
             $action = $pathParts[2];
         }
 
@@ -50,13 +44,12 @@ class App
         }
 
         // Создаем экземпляр класса контроллера
-        $objController=new $controller;
+        $objController = new $controller;
 
         // Если действия у контроллера не существует, выбрасываем исключение
         if (!method_exists($objController, $action)) {
             throw new \ErrorException('action does not exist');
         }
-
 
         // Вызываем действие контроллера
         $objController->$action();

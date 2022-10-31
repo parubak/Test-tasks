@@ -2,7 +2,9 @@
 
 namespace SerogaGolub\System;
 
+use ErrorException;
 use PDO;
+use PDOException;
 
 class DBmySQL
 {
@@ -18,7 +20,7 @@ class DBmySQL
 
 
     /**
-     * @throws \ErrorException
+     * @throws ErrorException
      */
     protected function openConnection(): PDO
     {
@@ -26,8 +28,8 @@ class DBmySQL
             $this->con = new PDO($this->server, $this->user, $this->pass, $this->options);
 
             return $this->con;
-        } catch (\PDOException $e) {
-            throw new \ErrorException("There is some problem in connection: " . $e->getMessage());
+        } catch (PDOException $e) {
+            throw new ErrorException("There is some problem in connection: " . $e->getMessage());
         }
     }
 

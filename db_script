@@ -5,5 +5,5 @@ CREATE TABLE `db_conference`.`conferences` (
                                                `data` DATE NOT NULL,
                                                `map_lat` DOUBLE NULL,
                                                `map_lng` DOUBLE NULL,
-                                               `country` VARCHAR(100) NULL,
+                                               `country` VARCHAR(100) NOT NULL,
                                                PRIMARY KEY (`id`));

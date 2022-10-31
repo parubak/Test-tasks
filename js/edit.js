@@ -32,7 +32,7 @@ window.addEventListener('load', async function () {
 
 });
 
-function sendFormData(form){
+function sendFormData(form) {
 
     let formData = new FormData(form);
     formData.append("id", arrayContent.id);
@@ -55,8 +55,8 @@ function sendFormData(form){
             statusMessage.innerHTML = "Conference save!";
 
             setTimeout(function () {
-                window.location = "/conference/info/?id="+arrayContent.id;
-            }, 3000);
+                window.location = "/conference/info/?id=" + arrayContent.id;
+            }, 2000);
         } else {
             statusMessage.classList.add("alert-danger");
             statusMessage.innerHTML = "Oops, error!";

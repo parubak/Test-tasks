@@ -5,11 +5,12 @@ namespace SerogaGolub\Controllers;
 use SerogaGolub\Models\HomeModel;
 use SerogaGolub\System\Controller;
 
-/**
- * Главный контроллер приложения
- */
+
 class HomeController extends Controller
 {
+    /**
+     * @throws \ErrorException
+     */
     public function __construct()
     {
         parent::__construct();
@@ -26,12 +27,12 @@ class HomeController extends Controller
 
         $fileMain = 'list';
 
-        $this->mainContent = $this->view->loadView($fileMain,[self::CONTENT=>$this->data]);
+        $this->mainContent = $this->view->loadView($fileMain, [self::CONTENT => $this->data]);
         $this->arrayData = [
             self::CONTENT => [
-                "main"=> $this->mainContent
+                "main" => $this->mainContent
             ],
-            self::MESSAGE=>$this->displayMessage
+            self::MESSAGE => $this->displayMessage
         ];
 
         $this->view->renderLayout($this->viewLayout, $this->arrayData);

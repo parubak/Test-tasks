@@ -15,7 +15,7 @@ window.addEventListener('load', async function () {
 
 });
 
-function sendFormData(form){
+function sendFormData(form) {
     let formData = new FormData(form);
 
     // добавить к пересылке ещё пару ключ - значение
@@ -36,7 +36,7 @@ function sendFormData(form){
 
             setTimeout(function () {
                 window.location = "/";
-            }, 3000);
+            }, 2000);
         } else {
             statusMessage.classList.add("alert-danger");
             statusMessage.innerHTML = "Oops, error!";

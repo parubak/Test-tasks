@@ -1,8 +1,6 @@
 <?php
 
 /**
- * Example Implementation of PSR-0
- *
  * @param $className
  */
 function autoload($className)
@@ -17,10 +15,6 @@ function autoload($className)
             DIRECTORY_SEPARATOR;
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-
-    echo "**fileName**";
-    echo $fileName;
-    echo "**fileName**";
 
     require $fileName;
 }

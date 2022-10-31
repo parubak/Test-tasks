@@ -1,13 +1,13 @@
 <?php
-/** @var array $CONTENT - Date */
+/** @var array $CONTENT - arrays */
 
-$id=$CONTENT[0]['id'];
-
+$id = $CONTENT[0]['id'];
 ?>
+
 <div class="container d-flex flex-column mt-2">
     <div class="text-right">
         <div class="col ">
-            <a href="/"><input type="button" name="beak" class="btn btn-dark w-25 mr-5" value="Back"/></a>
+            <a href="/"><input type="button" name="beak" class="btn btn-outline-dark w-25" value="Back"/></a>
         </div>
     </div>
     <div class="justify-content-sm-center">
@@ -26,9 +26,8 @@ $id=$CONTENT[0]['id'];
                     <div class="input-group-prepend">
                         <span class="input-group-text"></span>
                     </div>
-                    <input type="text" minlength="2" maxlength="255" class="form-control text-center"
-                           name="title" id="title" value="<?php
-                    echo $CONTENT[0]['title'] ?>" readonly>
+                    <div class="form-control text-center" style="width: 10px" readonly><?php
+                        echo $CONTENT[0]['title'] ?></div>
                 </div>
             </div>
         </div>
@@ -40,8 +39,9 @@ $id=$CONTENT[0]['id'];
                     <div class="input-group-prepend">
                         <span class="input-group-text"></span>
                     </div>
-                     <input type="text" id="inputDate" name="inputDate" class="form-control text-center"
-                           placeholder="y-M-d"  value="<?php echo $CONTENT[0]['data']; ?>" readonly/>
+                    <input type="text" maxlength="255" id="inputDate" name="inputDate" class="form-control text-center"
+                           value="<?php
+                           echo date_format(date_create($CONTENT[0]['data']), "d.m.Y "); ?>" readonly/>
                 </div>
             </div>
         </div>
@@ -52,7 +52,8 @@ $id=$CONTENT[0]['id'];
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"></span>
-                        <input class="form-control text-center" size="75" id="country" name="country" type="text" readonly>
+                        <input class="form-control text-center" size="75" id="country" name="country" type="text"
+                               readonly>
                     </div>
                 </div>
 
@@ -62,8 +63,9 @@ $id=$CONTENT[0]['id'];
                         <input type="button" class="btn  text-white w-25 p-2 btn-info" onclick="onclickEdit(<?php
                         echo $id ?>)" value="Edit"/>
 
-                        <input type="button" class="btn text-white w-25 ml-5 p-2 btn-danger" onclick="onclickDelete(<?php
-                        echo $id ?>)" value="Delete"/>
+                        <input type="button" class="btn text-white w-25 ml-5 p-2 btn-danger"
+                               onclick="onclickDelete(<?php
+                               echo $id ?>)" value="Delete"/>
 
                     </div>
                 </div>
@@ -73,9 +75,9 @@ $id=$CONTENT[0]['id'];
 </div>
 <script src="/js/home.js"></script>
 <script src="/js/info.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgFxVevJK-v3gWt49uyDpB91g8g1IMVrQ&callback&
+<script src="https://maps.googleapis.com/maps/api/js?key=??????????????????&callback&
 libraries=places&callback=initMap&solution_channel=GMP_guides_locatorplus_v2_a" defer></script>
-<script>const arrayContent=<?php echo json_encode($CONTENT[0]); ?>;</script>
+<script>const arrayContent =<?php echo json_encode($CONTENT[0]); ?>;</script>
 
 
 

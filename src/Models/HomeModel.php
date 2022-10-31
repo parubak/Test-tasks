@@ -2,7 +2,6 @@
 
 namespace SerogaGolub\Models;
 
-use SerogaGolub\Controllers\HomeController;
 use SerogaGolub\System\DBmySQL;
 
 class HomeModel extends DBmySQL
@@ -13,7 +12,6 @@ class HomeModel extends DBmySQL
     public function readData(): ?array
     {
         try {
-
             $conn = $this->openConnection();
             $sql = "SELECT *
                     FROM conferences 
@@ -22,9 +20,8 @@ class HomeModel extends DBmySQL
             $this->closeConnection();
         } catch (\PDOException $e) {
             $this->closeConnection();
-            throw new \ErrorException( "There is some problem in connection: " . $e->getMessage());
+            throw new \ErrorException("There is some problem in connection: " . $e->getMessage());
         }
-
         return $res;
     }
 }
